@@ -1,0 +1,43 @@
+.content {
+  margin-left: auto;
+  margin-right: auto;
+
+  &__itemList {
+    display: flex;
+    flex-direction: column;
+  }
+  &__item {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    // width: 100%;
+    // height: 100vh;
+    &__description {
+      // width: 40%;
+      flex: 0 0 40%;
+      flex-grow: inherit;
+      padding: 2rem 3.5rem;
+    }
+    &__thumbnail {
+      flex: 0 0 60%;
+      flex-grow: inherit;
+      // width: 100%;
+      // width: 100%;
+      // height: 100vh;
+      overflow: hidden;
+      &__img {
+        &:hover {
+          transform: scale(1.2);
+        }
+        transition: all 0.25s;
+        height: 50rem;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url(../../1.jpg);
+      }
+    }
+  }
+}
