@@ -1,0 +1,37 @@
+---
+- name: Run with inline v2 compose
+  hosts: all
+  vars:
+    ansible_python_interpreter: "/usr/bin/python3"
+  roles:
+    - name: ansible-doctl
+      doctl_source_version: 1.59.0
+  tasks:
+    - name: Install necessary pip modules
+      shell: pip3 install docker docker-compose
+    - name: Ensure Docker compose file exists
+      copy: src="../compose" dest="/home"
+    - name: remove remove golang-docker-credential-helpers, to make doctl work
+      apt:
+        name: golang-docker-credential-helpers
+        state: absent
+    - name: make sure, the digitalocean container registry can be accessed
+      shell: doctl registry login --access-token {{token}}
+    - name: Install necessary pip modules
+      shell: pip3 install docker docker-compose
+    - name: Tear down existing services
+      community.docker.docker_compose:
+        project_src: /home/compose
+        state: absent
+    - name: Remove old image
+
+      community.docker.docker_compose:
+        #this should compare the local release tag of the images and only pull if a newer is available
+        debug: true
+        remove_images: all
+        project_src: /home/compose
+        pull: true
+
+    - community.docker.docker_compose:
+        project_src: /home/compose
+        debug: true

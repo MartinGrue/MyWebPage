@@ -1,0 +1,23 @@
+version: "3"
+networks:
+  reactivity_net:
+services:
+  nginx:
+    image: nginx
+    ports: 
+      - "80:80"
+      - "5000:5000"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    networks: 
+      - reactivity_net
+  db:
+    image: registry.digitalocean.com/imagerepo/activitydb
+    container_name: activitexitydb
+    networks:
+      - reactivity_net
+  reactivity:
+    image: registry.digitalocean.com/imagerepo/reactapp
+    container_name: reactapp_container
+    networks:
+      - reactivity_net
