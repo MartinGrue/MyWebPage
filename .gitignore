@@ -1,4 +1,5 @@
-# dependencies
-node_modules
-#post sass compilation
-css
+.terraform*
+terraform.tfstate
+terraform.tfstate.backup
+nginx_backup.conf
+letsencrypt_backup_offical
