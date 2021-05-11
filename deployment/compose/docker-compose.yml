@@ -1,23 +1,31 @@
 version: "3"
 networks:
-  reactivity_net:
+  activity_net:
 services:
   nginx:
     image: nginx
-    ports: 
+    ports:
       - "80:80"
       - "5000:5000"
+      - "443:443"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    networks: 
-      - reactivity_net
+      # - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./reverseproxy/nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - /etc/letsencrypt:/etc/letsencrypt
+      - /usr/share/nginx/html/.well-known:/usr/share/nginx/html/.well-known
+      # - ./reverseproxy/letsencrypt/ssl-dhparams.pem:/etc/letsencrypt/ssl-dhparams.pem
+      # - ./reverseproxy/letsencrypt/options-ssl-nginx.conf:/etc/letsencrypt/options-ssl-nginx.conf
+    networks:
+      - activity_net
   db:
-    image: registry.digitalocean.com/imagerepo/activitydb
-    container_name: activitexitydb
+    image: registry.digitalocean.com/imagerepo/activitydb:6eaf53c
+    container_name: activitydb
     networks:
-      - reactivity_net
-  reactivity:
-    image: registry.digitalocean.com/imagerepo/reactapp
-    container_name: reactapp_container
+      - activity_net
+  activityapp:
+    image: registry.digitalocean.com/imagerepo/activityapp:d5f7a07
+    container_name: activityapp_container
     networks:
-      - reactivity_net
+      - activity_net
+    ports:
+      - "2000:5000"

@@ -9,7 +9,10 @@ variable "priv_ssh_key" {
   type = string
 }
 
+#DigitalOcean
+variable "token" { default = "" }
 
+#DigitalOcean Droplet
 variable "digitalocean_region" {
   default = "fra1"
 }
@@ -20,4 +23,12 @@ variable "digitalocean_size" {
 
 variable "digitalocean_image" {
   default = "debian-10-x64"
+}
+#DigitalOcean DNS
+variable "domainname" {
+  default = "gruema.de"
+}
+variable "subdomainnames" {
+  type    = list(string)
+  default = ["www", "react"]
 }

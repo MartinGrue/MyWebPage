@@ -6,7 +6,6 @@ terraform {
     }
   }
 }
-
 variable "token" { default = "" }
 
 variable "hosts" {
@@ -68,13 +67,16 @@ resource "digitalocean_droplet" "host" {
       "apt-get install -yq ufw ${join(" ", var.apt_packages)}",
     ]
   }
-  provisioner "local-exec" {
-    command = <<EOT
-    ANSIBLE_HOST_KEY_CHECKING=False \
-        ansible-playbook -u root -i '${self.ipv4_address},' \
-    --private-key ${var.priv_ssh_key} \
-    ../ansible/composePlaybook.yml \
-    --extra-vars 'token=${var.token}'
-    EOT
-  }
+  # provisioner "local-exec" {
+  #   command = <<EOT
+  #   ANSIBLE_HOST_KEY_CHECKING=False \
+  #       ansible-playbook -u root -i '${self.ipv4_address},' \
+  #   --private-key ${var.priv_ssh_key} \
+  #   ../ansible/composePlaybook.yml \
+  #   --extra-vars 'token=${var.token}'
+  #   EOT
+  # }
+}
+output "public_ip" {
+  value = digitalocean_droplet.host.ipv4_address
 }
