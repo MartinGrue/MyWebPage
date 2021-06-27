@@ -118,7 +118,7 @@
           register: CSR_data
         - debug: msg="{{ CSR_data.stdout }}"     
         - name: "Begin Let's Encrypt challenges"
-          letsencrypt:
+          community.crypto.acme_certificate:
             acme_directory: "{{ acme_directory }}"
             acme_version: "{{ acme_version }}"
             account_key_src: "{{ letsencrypt_account_key }}"
@@ -158,7 +158,7 @@
 
         - name: "Complete Let's Encrypt challenges"
           when: acme_challenge_your_domain is defined
-          letsencrypt:
+          community.crypto.acme_certificate:
             acme_directory: "{{ acme_directory }}"
             acme_version: "{{ acme_version }}"
             account_key_src: "{{ letsencrypt_account_key }}"
