@@ -1,4 +1,4 @@
-/* digitalocean */
+#DigitalOcean
 variable "digitalocean_token" {
   default = ""
 }
@@ -8,9 +8,6 @@ variable "pub_ssh_key" {
 variable "priv_ssh_key" {
   type = string
 }
-
-#DigitalOcean
-variable "token" { default = "" }
 
 #DigitalOcean Droplet
 variable "digitalocean_region" {
@@ -24,6 +21,7 @@ variable "digitalocean_size" {
 variable "digitalocean_image" {
   default = "debian-10-x64"
 }
+
 #DigitalOcean DNS
 variable "domainname" {
   default = "gruema.de"
