@@ -6,26 +6,37 @@ services:
     image: nginx
     ports:
       - "80:80"
-      - "5000:5000"
+      - "8888:8888"
       - "443:443"
     volumes:
+      - /var/www/html/:/var/www/html
       # - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./reverseproxy/nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - ./reverseproxy/nginx_ssl.conf:/etc/nginx/conf.d/nginx.conf
       - /etc/letsencrypt:/etc/letsencrypt
       - /usr/share/nginx/html/.well-known:/usr/share/nginx/html/.well-known
       # - ./reverseproxy/letsencrypt/ssl-dhparams.pem:/etc/letsencrypt/ssl-dhparams.pem
       # - ./reverseproxy/letsencrypt/options-ssl-nginx.conf:/etc/letsencrypt/options-ssl-nginx.conf
     networks:
       - activity_net
-  db:
-    image: registry.digitalocean.com/imagerepo/activitydb:6eaf53c
-    container_name: activitydb
+  activityfrontend:
+    image: registry.digitalocean.com/imagerepo/activity:activityfrontend-8a7ed56
+    volumes: 
+      - ./reverseproxy/activity_frontend.conf:/etc/nginx/conf.d/default.conf
+      - /var/www/html/:/var/www/html2
     networks:
       - activity_net
-  activityapp:
-    image: registry.digitalocean.com/imagerepo/activityapp:d5f7a07
-    container_name: activityapp_container
-    networks:
-      - activity_net
+
+  activitydb:
+    image: registry.digitalocean.com/imagerepo/activity:activitydb-fd10870
     ports:
-      - "2000:5000"
+      - "3306:3306"
+    networks:
+      - activity_net
+
+  activitybackend:
+    image: registry.digitalocean.com/imagerepo/activity:activitybackend-5ed0df8
+
+   # ports:
+    #   - "5000:5000"
+    networks:
+      - activity_net
