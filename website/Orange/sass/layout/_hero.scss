@@ -1,5 +1,4 @@
 .hero {
-  background-color: #ff895d;
   border-radius: 5px;
   position: fixed;
   top: 2.5rem;
@@ -41,7 +40,8 @@
     width: auto;
     max-height: 400px;
     @include respond(big-desktop) {
-      max-height: 450px;    }
+      max-height: 450px;
+    }
 
     @include respond(tab-land) {
       max-height: 350px;

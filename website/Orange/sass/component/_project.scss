@@ -1,0 +1,16 @@
+.project {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  &__header {
+  }
+  &__main {
+    display: flex;
+    flex-direction: row;
+    &--text{
+      padding-left: 2rem;
+    }
+  }
+}

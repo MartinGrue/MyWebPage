@@ -1,5 +1,5 @@
 .row {
-  max-width: $gird-width;
+  max-width: $grid-width;
   margin: 0 auto;
   padding-left: 2rem;
   padding-right: 2rem;
@@ -34,7 +34,7 @@
   [class^='col-'] {
     float: left;
     &:not(:last-child) {
-      margin-right: $gutter-horizontal;
+      // margin-right: $gutter-horizontal;
     }
     @include respond(phone) {
       width: 100% !important;

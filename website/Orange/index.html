@@ -7,16 +7,23 @@
     <title>Document</title>
   </head>
   <body>
+    <div class="background-withgrad">
+      <img
+        class="background-img"
+        src="./img/faris-mohammed-d30sszrW7Vw-unsplash3.jpg"
+      />
+    </div>
+
     <header class="hero" style="z-index: 1">
       <div class="hero__container">
         <div class="row row-respond-big">
           <div class="col-1-of-2">
             <div class="hero__textContent">
               <div class="hero__logoContainer">
-                <img class="hero__logo" src="./logo-white.png" alt="" />
+                <img class="hero__logo" src="./img/logo-white.png" alt="" />
               </div>
               <h1 class="heading-primary">Heading</h1>
-              <p class="paragraph" style="color: #fff;">
+              <p class="paragraph" style="color: #fff">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi,
                 nemo, qui maxime sit dolorem labore quisquam minus fugiat, culpa
                 nesciunt maiores amet natus delectus veritatis facere ipsa magni
@@ -26,45 +33,50 @@
           </div>
           <div class="col-1-of-2">
             <div class="hero__profileImageContainer">
-              <img class="hero__img" src="./silhouette_1.svg" />
+              <img class="hero__img" src="./img/silhouette_1.svg" />
             </div>
           </div>
         </div>
       </div>
     </header>
-    <main style="z-index: 3;  margin-top: 37rem;  position: relative;">
+    <main style="z-index: 3; margin-top: 37rem; position: relative">
       <div class="row row-respond-big">
         <div class="content">
           <div class="content__itemList">
             <div class="content__item">
               <div class="content__item__description">
-                <h1 class="heading-tertiary">About</h1>
-                <p class="paragraph" style="color: #fff;">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi,
-                  nemo, qui maxime sit dolorem labore quisquam minus fugiat,
-                  culpa nesciunt maiores amet natus delectus veritatis facere
-                  ipsa magni quis dolores!
-                </p>
+                <div class="project__container">
+                  <div class="project__header">
+                    <h1 class="heading-primary">About</h1>
+                  </div>
+                  <div class="project__main">
+                    <div class="hexagon2">
+                      <div
+                        class="hexagon2__list hexagon2__list--withDropShadow"
+                      >
+                        <div class="hexagon2__item">
+                          <div class="hexagon2__item--withborder"></div>
+                        </div>
+
+                        <div class="hexagon2__item"></div>
+                        <div class="hexagon2__item"></div>
+                      </div>
+                    </div>
+                    <div class="project__main--text">
+                      <p class="paragraph" style="color: #fff">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Modi, nemo, qui maxime sit dolorem labore quisquam minus
+                        fugiat, culpa nesciunt maiores amet natus delectus
+                        veritatis facere ipsa magni quis dolores!
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
               <figure class="content__item__thumbnail">
                 <div class="content__item__thumbnail__img"></div>
               </figure>
             </div>
-
-            <!-- <article class="content__item" style="  background-color: #333;">
-              <div class="content__item__description">
-                <h1 class="heading-tertiary">About</h1>
-                <p class="paragraph" style="color: #fff;">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi,
-                  nemo, qui maxime sit dolorem labore quisquam minus fugiat,
-                  culpa nesciunt maiores amet natus delectus veritatis facere
-                  ipsa magni quis dolores!
-                </p>
-              </div>
-              <figure >
-                <img class="content__item__thumbnail" src="1.jpg"></img>
-              </figure>
-            </div> -->
           </div>
         </div>
       </div>
