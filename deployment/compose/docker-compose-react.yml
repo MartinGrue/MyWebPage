@@ -1,0 +1,23 @@
+version: "3"
+networks:
+  activity_net: null
+  host_net:
+    external: true
+services:
+  frontend:
+    image: registry.digitalocean.com/imagerepo/activity:activityfrontend-latest
+    user: root
+    networks:
+      host_net:
+        aliases:
+          - "reactApp"
+      activity_net: null
+  activitydb:
+    image: registry.digitalocean.com/imagerepo/activity:activitydb-latest
+    networks:
+      - activity_net
+
+  backend:
+    image: registry.digitalocean.com/imagerepo/activity:activitybackend-latest
+    networks:
+      - activity_net

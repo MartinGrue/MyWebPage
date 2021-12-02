@@ -1,0 +1,35 @@
+- name: make sure, the digitalocean container registry can be accessed
+  shell: doctl registry login --access-token {{token}}
+
+- name: Ensure Docker compose files exists
+  copy:
+    src: "{{ item }}"
+    dest: "{{working_dir}}/"
+    owner: root
+    mode: 600
+  with_fileglob:
+    - ../compose/docker-compose*.yml
+
+- name: Create host network
+  ansible.builtin.shell:
+    cmd: docker network create host_net || true
+
+- name: Tear down existing docker services
+  community.docker.docker_compose:
+    project_src: "{{working_dir}}"
+    files:
+      - docker-compose.yml
+      - docker-compose-react.yml
+    state: absent
+
+- name: Copy nginx ssl config
+  copy:
+    src: "../compose/nginx.conf"
+    dest: "{{working_dir}}/"
+
+- name: Start all compose files
+  community.docker.docker_compose:
+    project_src: "{{working_dir}}"
+    files:
+      - docker-compose-react.yml
+      - docker-compose.yml

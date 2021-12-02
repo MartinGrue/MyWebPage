@@ -25,7 +25,7 @@
     group: root
     mode: u=rwx,g=rx,o=rx
 
-- name: Create build directory
+- name: Create acme-challenge build directory
   file:
     path: "/home/build"
     state: directory
@@ -33,7 +33,7 @@
     group: root
     mode: u=rwx,g=x,o=x
 
-- name: copy docker build files
+- name: copy acme-challenge docker files
   copy:
     src: "{{role_path}}/files/{{item}}"
     dest: /home/build/{{item}}
@@ -78,7 +78,7 @@
 - name: copy Let's Encrypt CSR generation script
   copy:
     src: CSRgeneration.sh
-    dest: dest=/home/compose/
+    dest: /home/compose/
     mode: 0777
 
 - name: run Let's Encrypt CSR generation script

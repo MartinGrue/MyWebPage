@@ -13,41 +13,16 @@
     acme_directory: https://acme-staging-v02.api.letsencrypt.org/directory
     # acme_directory: https://acme-v02.api.letsencrypt.org/directory
     acme_version: 2
-    acme_email: grruebler.martin@outlook.de
+    acme_email: gruebler.martin@outlook.de
     acme_challenge_type: http-01
     letsencrypt_keys_dir: /etc/letsencrypt/keys
     letsencrypt_csrs_dir: /etc/letsencrypt/csrs
     letsencrypt_certs_dir: /etc/letsencrypt/certs
   roles:
-    # - name: ansible-doctl
-    #   doctl_source_version: 1.59.0
-    # - name: system-preparation
-    #   working_dir: /home/compose
-    # - name: https
-  tasks:
-    - name: Tear down existing docker services
-      community.docker.docker_compose:
-        project_src: /home/compose
-        state: absent
-        
-    - name: Prepare folder structure for nginx config
-      file:
-        path: "{{working_dir}}/reverseproxy"
-        state: directory
-
-    - name: "Copy nginx ssl config"
-      copy:
-        src: "../compose/reverseproxy/{{ item }}"
-        dest: "{{working_dir}}/reverseproxy/"
-      with_items:
-        - nginx_ssl.conf
-        - activity_frontend.conf
-
-    - name: Ensure Docker compose files exists
-      copy:
-        src: "../compose/docker-compose.yml"
-        dest: "{{working_dir}}/"
-
-    - name: Restart nginx with with https config
-      community.docker.docker_compose:
-        project_src: /home/compose
+    - name: system-preparation
+      working_dir: /home/compose
+    - name: ansible-doctl
+      doctl_source_version: 1.59.0
+    - name: https
+    - name: run-compose
+      working_dir: /home/compose

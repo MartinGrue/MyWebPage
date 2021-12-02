@@ -1,19 +1,27 @@
 ---
+- name: Creates working_dir
+  file:
+    path: "{{ working_dir }}"
+    state: directory
+
 - name: Install necessary pip modules
   shell: pip3 install docker docker-compose
 
-- name: Tear down existing docker services
-  community.docker.docker_compose:
-    project_src: "{{working_dir}}"
-    state: absent
-
-- name: remove remove golang-docker-credential-helpers, to make doctl work
+- name: remove golang-docker-credential-helpers, to make doctl work
   apt:
     name: golang-docker-credential-helpers
     state: absent
 
-- name: make sure, the digitalocean container registry can be accessed
-  shell: doctl registry login --access-token {{token}}
-
 - name: Install necessary pip modules
   shell: pip3 install docker docker-compose
+
+- name: Get running containers
+  docker_host_info:
+    containers: yes
+  register: docker_info
+
+- name: Stop running containers
+  docker_container:
+    name: "{{ item }}"
+    state: stopped
+  loop: "{{ docker_info.containers | map(attribute='Id') | list }}"
