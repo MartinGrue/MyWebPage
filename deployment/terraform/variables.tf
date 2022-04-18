@@ -15,7 +15,7 @@ variable "digitalocean_region" {
 }
 
 variable "digitalocean_size" {
-  default = "s-1vcpu-1gb"
+  default = "s-1vcpu-2gb"
 }
 
 variable "digitalocean_image" {
@@ -28,5 +28,5 @@ variable "domainname" {
 }
 variable "subdomainnames" {
   type    = list(string)
-  default = ["www", "react"]
+  default = ["www", "react", "dating"]
 }

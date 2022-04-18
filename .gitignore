@@ -4,3 +4,5 @@ terraform.tfstate.backup
 infra.out
 nginx_backup.conf
 letsencrypt_backup_offical
+runTerraform.sh
+runPlayBook.sh

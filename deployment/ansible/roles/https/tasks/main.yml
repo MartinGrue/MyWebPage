@@ -132,7 +132,8 @@
     chain_dest: "{{ letsencrypt_certs_dir }}/chain_{{ domain_name }}.crt"
     fullchain_dest: "{{ letsencrypt_certs_dir }}/fullchain_{{ domain_name }}"
     data: "{{ acme_challenge_your_domain }}"
-
+  register: acme_completed
+  until: acme_completed is not failed
 
 - name: Remove nginx-acme-challenge container
   community.docker.docker_container:

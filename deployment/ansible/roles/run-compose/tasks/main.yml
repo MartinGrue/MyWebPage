@@ -20,6 +20,7 @@
     files:
       - docker-compose.yml
       - docker-compose-react.yml
+      - docker-compose-dating.yml
     state: absent
 
 - name: Copy nginx ssl config
@@ -31,5 +32,6 @@
   community.docker.docker_compose:
     project_src: "{{working_dir}}"
     files:
-      - docker-compose-react.yml
       - docker-compose.yml
+      - docker-compose-react.yml
+      - docker-compose-dating.yml

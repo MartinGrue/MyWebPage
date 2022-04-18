@@ -67,10 +67,16 @@ resource "digitalocean_droplet" "host" {
       "apt-get install -yq ufw ${join(" ", var.apt_packages)}",
     ]
   }
+  provisioner "local-exec" {
+    command = <<EOT
+      sed -i "s/HOSTIP=.*/HOSTIP=${self.ipv4_address}/g" ../ansible/runPlayBook.sh
+    EOT
+    # command = "echo ${PWD%/*}/ansible/runPlaybook.sh"
+  }
   # provisioner "local-exec" {
   #   command = <<EOT
   #   ANSIBLE_HOST_KEY_CHECKING=False \
-  #       ansible-playbook -u root -i '${self.ipv4_address},' \
+  #   ansible-playbook -u root -i '${self.ipv4_address},' \
   #   --private-key ${var.priv_ssh_key} \
   #   ../ansible/composePlaybook.yml \
   #   --extra-vars 'token=${var.token}'

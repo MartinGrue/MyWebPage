@@ -17,7 +17,13 @@ services:
     networks:
       - activity_net
 
-  backend:
+  reactbackend:
     image: registry.digitalocean.com/imagerepo/activity:activitybackend-latest
+    container_name: reactbackend
     networks:
-      - activity_net
+      host_net:
+        aliases:
+          - "reactbackend"
+      activity_net: 
+        aliases:
+          - "backend"

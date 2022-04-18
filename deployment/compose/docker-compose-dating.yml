@@ -1,0 +1,29 @@
+version: "3"
+networks:
+  dating_net: null
+  host_net:
+    external: true
+services:
+  datingfrontend:
+    image: registry.digitalocean.com/imagerepo/datingapp:datingappfrontend-latest
+    user: root
+    networks:
+      host_net:
+        aliases:
+          - "datingApp"
+      dating_net: null
+  datingdb:
+    image: registry.digitalocean.com/imagerepo/datingapp:datingappdb-latest
+    networks:
+      - dating_net
+
+  datingappbackend:
+    image: registry.digitalocean.com/imagerepo/datingapp:datingappbackend-latest
+    container_name: datingappbackend
+    networks:
+      host_net:
+        aliases:
+          - "datingappbackend"
+      dating_net: 
+        aliases:
+          - "backend"
